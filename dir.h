@@ -20,10 +20,15 @@ typedef struct {
     int dir;
 } dirlistcount_t;
 
-dirlistnames_t * getDirEntries(char *dirname);
-filenames_t * getFilenames(char *dirname);
-dirlistcount_t * countOfListing(char *dirname);
+dirlistnames_t * getDirEntries(char *);
+filenames_t * getFilenames(char *);
+dirlistcount_t * countOfListing(char *);
+filenames_t * addFilenames(filenames_t *, char *);
 bool isdir(struct dirent *);
 bool isSymbolicDirStructure(char *name);
+void printFilenames(const filenames_t *filenames);
+
+bool freeEntries(filenames_t *);
+
 
 #endif
