@@ -3,7 +3,7 @@
 
 #include "dir.h"
 
-#define OPTIONS "f:rv."
+#define OPTIONS "f:d:rv."
 #define EOI EOF
 
 void usage(char *);

@@ -41,7 +41,7 @@ filenames_t * getFilenames(char *dirname) {
     }
 
     struct dirent *entry;
-    for (size_t i = 0; (entry = readdir(dirstream)) && i < count; ) {
+    for (size_t i = 0; (entry = readdir(dirstream)) && i != count; ) {
         if (entry == NULL) {
             perror("Error on entry allocation");
             return NULL;
@@ -168,7 +168,8 @@ bool isSymbolicDirStructure(char *name) {
 
 void printFilenames(const filenames_t *filenames) {
     if (filenames) {
-        for (int i = 0; i < filenames->count; i++) {
+        size_t count = filenames->count;
+        for (int i = 0; i != count; i++) {
             printf("%d. %s\n", i + 1, filenames->f_names[i]);
         }
     }
@@ -187,7 +188,7 @@ bool freeEntries(filenames_t *list) {
         return true;
     }
 
-    for (size_t i = 0; i < count; i++) {
+    for (size_t i = 0; i != count; i++) {
         free(list->f_names[i]);
     }
     free(list->f_names);

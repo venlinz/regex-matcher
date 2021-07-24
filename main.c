@@ -7,6 +7,7 @@
 
 #include "args.h"
 #include "dir.h"
+#include "bufio.h"
 
 
 #define _POSIX_OPTION_ORDER
@@ -40,11 +41,14 @@ int main(int argc, char **argv) {
                 else if (filenames->count > 0) {
                     filenames = addFilenames(filenames, CUR_DIR);
                 }
+                break;
+
+
         }
     }
 
     printFilenames(filenames);
-
+    openfiles(filenames);
     freeEntries(filenames);
     return 0;
 }
