@@ -12,15 +12,6 @@
 
 #define LINE_LEN 50
 
-/* char * readfile(FILE *fp) { */
-
-/*     if (fp == NULL) { */
-/*         perror("Error on FILE* in bufio.c"); */
-/*         return NULL; */
-/*     } */
-
-/*     return NULL; */
-/* } */
 
 int openfiles(filenames_t *filenames) {
     int flag = 0;
@@ -30,11 +21,11 @@ int openfiles(filenames_t *filenames) {
     }
 
 
-    char *buffer = malloc(sizeof (char) * 128);
-    assert (buffer != NULL);
+    char *buffer = NULL;
     FILE *fp = NULL;
     size_t count = filenames -> count;
     for (size_t i = 0; i < count; ++i) {
+        bool hasMatch = false;
         if (!isObjectFile(filenames->f_names[i])) {
             fp = fopen (filenames->f_names[i], "r");
             if (fp == NULL) {
@@ -43,8 +34,14 @@ int openfiles(filenames_t *filenames) {
             /* while (fgets(buffer, 128, fp) != NULL) { */
             while ((buffer = readline(fp)) != NULL) {
                 if (match(buffer, "ab")) {
+                    if (!hasMatch) {
+                        hasMatch = true;
+                        prints(filenames->f_names[i]);
+                        prints(":");
+                    }
                     prints(buffer);
                 }
+                free(buffer);
             }
             fclose(fp);
         }
@@ -60,10 +57,6 @@ char * readline(FILE *fp) {
         return NULL;
     }
 
-    /* if (feof(fp) != 0) { */
-    /*     /1* perror("Error end of file reached"); *1/ */
-    /*     return NULL; */
-    /* } */
 
     size_t curBufLen = LINE_LEN;
     char *buffer = (char *) malloc(sizeof(char) * LINE_LEN);

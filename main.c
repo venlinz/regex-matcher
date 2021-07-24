@@ -47,7 +47,6 @@ int main(int argc, char **argv) {
         }
     }
 
-    printFilenames(filenames);
     openfiles(filenames);
     freeEntries(filenames);
     return 0;

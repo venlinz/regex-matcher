@@ -32,6 +32,10 @@ char * findFileExtension(char *filename) {
     bool isnormalfile = false;
     char *ext = malloc(sizeof(char) * 6);
     assert(ext != NULL);
+    if (filename[0] == '.') {
+        strcpy(ext, "text");
+        return ext;
+    }
 
     size_t len = strlen(filename);
     size_t c = 0;
