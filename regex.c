@@ -1,9 +1,12 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-#include "aorb.h"
+#include "regex.h"
 
 bool match(char *text, char *regex) {
+    if (*regex == '^')
+        return matchhere(text, regex + 1);
+
     do {
         if (matchhere(text, regex)) 
             return true;

@@ -28,7 +28,7 @@
 *.app
 *.i*86
 *.x86_64
-aorb
+reg
 fast
 
 # Debug files

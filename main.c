@@ -8,6 +8,7 @@
 #include "args.h"
 #include "dir.h"
 #include "bufio.h"
+#include "misc.h"
 
 
 #define _POSIX_OPTION_ORDER
@@ -20,10 +21,13 @@ extern int opterr;
 
 int main(int argc, char **argv) {
 
-    if (argc < 2) {
+    if (argc < 3) {
         usage(basename(argv[0]));
         return EXIT_FAILURE;
     }
+
+    char *pattern = (char *) malloc(strlen(argv[1] + 1));
+    strcpy(pattern, argv[1]);
 
     filenames_t *filenames = NULL;
 
@@ -42,12 +46,10 @@ int main(int argc, char **argv) {
                     filenames = addFilenames(filenames, CUR_DIR);
                 }
                 break;
-
-
         }
     }
 
-    openfiles(filenames);
+    openfiles(filenames, pattern);
     freeEntries(filenames);
     return 0;
 }

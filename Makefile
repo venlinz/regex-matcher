@@ -5,10 +5,10 @@ CC		=	gcc
 CFLAGS	=	-Wall -g
 
 
-aorb : main.c args.o aorb.o dir.o misc.o bufio.o
+reg : main.c args.o regex.o dir.o misc.o bufio.o
 	$(CC) $(CFLAGS) $^ -o $@
 
-aorb.o : aorb.c aorb.h
+aorb.o : regex.c regex.h
 	$(CC) $(CFLAGS) -c $^
 
 dir.o : dir.h dir.c

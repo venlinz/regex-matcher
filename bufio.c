@@ -8,12 +8,12 @@
 #include "bufio.h"
 #include "dir.h"
 #include "misc.h"
-#include "aorb.h"
+#include "regex.h"
 
 #define LINE_LEN 50
 
 
-int openfiles(filenames_t *filenames) {
+int openfiles(filenames_t *filenames, char *pattern) {
     int flag = 0;
     if (filenames == NULL) {
         perror("Error filenames_t is null in bufio.c");
@@ -33,7 +33,7 @@ int openfiles(filenames_t *filenames) {
             }
             /* while (fgets(buffer, 128, fp) != NULL) { */
             while ((buffer = readline(fp)) != NULL) {
-                if (match(buffer, "ab")) {
+                if (match(buffer, pattern)) {
                     if (!hasMatch) {
                         hasMatch = true;
                         prints(filenames->f_names[i]);
