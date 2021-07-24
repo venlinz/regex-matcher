@@ -3,15 +3,16 @@
 
 #include "aorb.h"
 
-bool match(char *text) {
+bool match(char *text, char *regex) {
+    if (*regex == '\0')
+        return true;
+
     if (*text == '\0')
         return false;
 
-    if (*text == 'a')
-        return true;
+    if (*text == *regex)
+        return match(text + 1, regex + 1);
     
-    if (*text == 'b')
-        return true;
     
     return match(text + 1);
 }
