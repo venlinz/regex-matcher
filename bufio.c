@@ -25,20 +25,15 @@ int openfiles(filenames_t *filenames, char *pattern) {
     FILE *fp = NULL;
     size_t count = filenames -> count;
     for (size_t i = 0; i < count; ++i) {
-        bool hasMatch = false;
         if (!isObjectFile(filenames->f_names[i])) {
             fp = fopen (filenames->f_names[i], "r");
             if (fp == NULL) {
                 return flag = -1;
             }
-            /* while (fgets(buffer, 128, fp) != NULL) { */
             while ((buffer = readline(fp)) != NULL) {
                 if (match(buffer, pattern)) {
-                    if (!hasMatch) {
-                        hasMatch = true;
-                        prints(filenames->f_names[i]);
-                        prints(":");
-                    }
+                    prints(filenames->f_names[i]);
+                    prints(":");
                     prints(buffer);
                 }
                 free(buffer);

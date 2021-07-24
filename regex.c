@@ -18,8 +18,23 @@ bool matchhere(char *text, char *regex) {
     if (*regex == '\0')
         return true;
 
+    int start, end;
+    start = end = 0;
+    if (*regex == '[') {
+        start = (int) *(regex + 1);
+        end = (int) *(regex + 3);
+        for (int i = start; i <= end; i++) {
+            if (*text == (char) i) 
+                return matchhere(text + 1, regex + 5);
+        }
+    }
+
     if (*text != '\0' && *text == *regex)
         return matchhere(text + 1, regex + 1);
 
     return false;    
 }
+
+// ax
+// az
+// ay
