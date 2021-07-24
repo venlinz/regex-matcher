@@ -6,7 +6,7 @@
 #include "dir.h"
 
 char * readfile(filenames_t *);
-char * readline(char *, FILE *);
+char * readline(FILE *);
 int openfiles(filenames_t *);
 
 #endif

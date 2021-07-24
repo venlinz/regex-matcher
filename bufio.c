@@ -34,19 +34,15 @@ int openfiles(filenames_t *filenames) {
     assert (buffer != NULL);
     FILE *fp = NULL;
     size_t count = filenames -> count;
-    printf("count: %ld\n", count);
     for (size_t i = 0; i < count; ++i) {
-        //printsn(filenames->f_names[i]);
         if (!isObjectFile(filenames->f_names[i])) {
-            printf("%ld. ", i);
-            printsn(filenames->f_names[i]);
-            sleep(1);
             fp = fopen (filenames->f_names[i], "r");
             if (fp == NULL) {
                 return flag = -1;
             }
-            while (fgets(buffer, 128, fp) != NULL) {
-                if (match(buffer)) {
+            /* while (fgets(buffer, 128, fp) != NULL) { */
+            while ((buffer = readline(fp)) != NULL) {
+                if (match(buffer, "ab")) {
                     prints(buffer);
                 }
             }
@@ -58,7 +54,7 @@ int openfiles(filenames_t *filenames) {
 }
 
 
-char * readline(char *buffer, FILE *fp) {
+char * readline(FILE *fp) {
     if (fp == NULL) {
         perror("Error on FILE * in bufio.c");
         return NULL;
@@ -70,7 +66,7 @@ char * readline(char *buffer, FILE *fp) {
     /* } */
 
     size_t curBufLen = LINE_LEN;
-    buffer = (char *) malloc(sizeof(char) * LINE_LEN);
+    char *buffer = (char *) malloc(sizeof(char) * LINE_LEN);
     if (buffer == NULL) {
         perror("Error on char * buffer allocation");
         return NULL;
