@@ -28,9 +28,15 @@
 *.app
 *.i*86
 *.x86_64
+aorb
+fast
 
 # Debug files
 *.dSYM/
 *.su
 *.idb
 *.pdb
+tags
+
+# Unwanted dirs
+/bug
