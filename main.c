@@ -26,7 +26,7 @@ int main(int argc, char **argv) {
         return EXIT_FAILURE;
     }
 
-    char *pattern = (char *) malloc(strlen(argv[1] + 1));
+    char *pattern = (char *) malloc(strlen(argv[1]) + 1);
     strcpy(pattern, argv[1]);
 
     filenames_t *filenames = NULL;
@@ -50,6 +50,7 @@ int main(int argc, char **argv) {
     }
 
     openfiles(filenames, pattern);
+    free(pattern);
     freeEntries(filenames);
     return 0;
 }
