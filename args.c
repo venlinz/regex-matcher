@@ -13,7 +13,6 @@ void usage(char *argv0) {
 
 filenames_t * addFilename(filenames_t *filenames, char *filename) {
 
-    printf("addFilename in args.c\n");
     if (filenames == NULL) {
         filenames = (filenames_t *) malloc(sizeof(filenames_t));
         if (filenames == NULL) {

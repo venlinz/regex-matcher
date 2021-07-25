@@ -29,12 +29,9 @@ bool matchhere(char *text, char *regex) {
         }
     }
 
-    if (*text != '\0' && *text == *regex)
+    if (*text != '\0' && (*text == *regex 
+                || *regex == '.'))
         return matchhere(text + 1, regex + 1);
 
     return false;    
 }
-
-// ax
-// az
-// ay
