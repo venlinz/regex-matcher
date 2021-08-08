@@ -38,5 +38,5 @@ cleanin :
 	-rm *.gch
 
 .PHONY : fast
-fast : main.c args.o aorb.o dir.o misc.o bufio.o
-	$(CC) -O2 $^ -o $@
+fast : main.c args.c args.h regex.h regex.c dir.c dir.h misc.c misc.h bufio.h bufio.c
+	$(CC) -O3 $^ -o $@
