@@ -6,6 +6,7 @@
 
 
 bool match(char *text, char *regex) {
+
     if (*regex == '^')
         return matchhere(text, regex + 1);
 
@@ -18,8 +19,12 @@ bool match(char *text, char *regex) {
 
 
 bool matchhere(char *text, char *regex) {
+
     if (*regex == '\0')
         return true;
+
+    if (regex[1] == '*')
+        return matchstar(text, regex + 2, *regex);
 
     if (*regex == '[') {
         int nextSymbolIdx = findIdxOfNxtSymbol(regex);
@@ -38,7 +43,17 @@ bool matchhere(char *text, char *regex) {
 }
 
 
+bool matchstar(char *text, char *regex, char c) {
+
+    do {
+        if (matchhere(text, regex))
+            return true;
+    } while (*text != '\0' && (*text++ == c || c == '.'));
+    return false;
+}
+
 bool matchanychar(char *text, char *regex) {
+
     size_t strtIdxOfNxtSymbol = findIdxOfNxtSymbol(regex);
     if (!strtIdxOfNxtSymbol) {
         fprintf(stderr, "Invalid set match expression %s\n", regex);
