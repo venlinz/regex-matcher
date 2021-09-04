@@ -1,2 +1,5 @@
 # regex-matcher
+
 Simple Regex pattern matcher built in my path for learning process
+This uses recursion to match patterns, it is based on brian kernighan's explanation of 
+Rob Pike's simple regex code[Regular expression matcher](https://www.cs.princeton.edu/courses/archive/spr09/cos333/beautiful.html).
