@@ -36,6 +36,7 @@ fast
 *.su
 *.idb
 *.pdb
+callgrind*
 tags
 
 # Unwanted dirs
