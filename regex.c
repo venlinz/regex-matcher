@@ -26,6 +26,9 @@ bool matchhere(char *text, char *regex) {
     if (regex[1] == '*')
         return matchstar(text, regex + 2, *regex);
 
+    if (regex[1] == '+')
+        return matchplus(text, regex + 2, *regex);
+
     if (*regex == '[') {
         int nextSymbolIdx = findIdxOfNxtSymbol(regex);
         if (*(regex + 2) == '-' && matchsetrange(text, regex))
@@ -49,6 +52,16 @@ bool matchstar(char *text, char *regex, char c) {
         if (matchhere(text, regex))
             return true;
     } while (*text != '\0' && (*text++ == c || c == '.'));
+    return false;
+}
+
+
+bool matchplus(char *text, char *regex, char c) {
+    while (*text != '\0' && (*text++ == c)) {
+        if (matchhere(text, regex))
+            return true;
+    }
+
     return false;
 }
 
